@@ -1,398 +1,295 @@
-# Hello---A-Short-Film-About-Tolerance-and-Diversity
-
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>A Simple ‘Hello’ Means More Than Words</title>
+
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;500&display=swap');:root {
-  --primary: #64748b;
-  --secondary: #f1f5f9;
-  --background: #fafafa;
-  --text: #1e293b;
-  --accent: #d1d5db;
-}
+    :root{
+      --primary:#64748b;
+      --secondary:#f1f5f9;
+      --background:#fafafa;
+      --text:#1e293b;
+      --accent:#d1d5db;
+    }
+    [data-theme="dark"]{
+      --primary:#94a3b8;
+      --secondary:#1e293b;
+      --background:#0f172a;
+      --text:#f1f5f9;
+      --accent:#334155;
+    }
 
-[data-theme="dark"] {
-  --primary: #94a3b8;
-  --secondary: #1e293b;
-  --background: #0f172a;
-  --text: #f1f5f9;
-  --accent: #334155;
-}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--background);
+      color:var(--text);
+      line-height:1.8;
+      transition:background-color .45s, color .45s;
+      -webkit-font-smoothing:antialiased;
+    }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  scroll-behavior: smooth;
-}
+    header{
+      text-align:center;
+      padding:5.5rem 1rem 2.5rem;
+      background:linear-gradient(180deg,#f8fafc 0%,#e2e8f0 100%);
+      border-bottom:1px solid var(--accent);
+      position:relative;
+      overflow:hidden;
+    }
+    [data-theme="dark"] header{
+      background:linear-gradient(180deg,#1e293b 0%,#0f172a 100%);
+    }
+    header h1{
+      font-family:'Playfair Display',serif;
+      font-size:clamp(2.2rem,5vw,3rem);
+      color:inherit;
+      margin-bottom:1rem;
+      display:inline-block;
+      position:relative;
+    }
+    header h1::after{
+      content:"";
+      position:absolute;
+      left:0;bottom:-8px;height:3px;width:100%;
+      background:var(--primary);border-radius:2px;
+    }
+    .meta-info{opacity:.95;margin-top:.6rem;font-size:.95rem}
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--background);
-  color: var(--text);
-  line-height: 1.8;
-  overflow-x: hidden;
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
+    .container{
+      max-width:1100px;margin:2rem auto 3.5rem;padding:0 1rem;
+    }
+    aside{
+      display:flex;gap:2rem;background:var(--secondary);padding:2rem;border-radius:12px;color:var(--text);
+      margin-bottom:1.6rem;box-shadow:0 6px 20px rgba(0,0,0,.05);
+    }
+    [data-theme="dark"] aside{background:#111827;color:#e2e8f0}
+    aside section{flex:1;min-width:220px;padding:0 1rem}
+    aside section:not(:last-child){border-right:1px solid var(--accent)}
+    [data-theme="dark"] aside section:not(:last-child){border-color:#475569}
+    aside h3{font-family:'Playfair Display',serif;color:var(--primary);margin-bottom:.6rem}
 
-header {
-  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-  color: var(--text);
-  padding: 6rem 1rem 3rem;
-  text-align: center;
-  border-bottom: 1px solid var(--accent);
-  position: relative;
-  overflow: hidden;
-}
+    main{
+      background:#fff;border-radius:12px;padding:2.6rem;box-shadow:0 8px 30px rgba(0,0,0,.05);
+      transition:background-color .45s, transform .4s, opacity .5s;opacity:1;
+    }
+    [data-theme="dark"] main{background:#0f172a}
+    article p{margin-bottom:1.2rem;text-align:justify;font-size:1.03rem}
+    .work-cited-box{margin-top:1.6rem;padding:1.2rem;border:1px solid var(--accent);border-radius:10px;background:transparent}
+    [data-theme="dark"] .work-cited-box{border-color:#475569;background:rgba(17,24,39,.4)}
 
-header::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle at 50% 0%, rgba(100,116,139,0.15), transparent 70%);
-  z-index: 0;
-  animation: fadeBackground 6s ease-in-out infinite alternate;
-}
+    footer{text-align:center;padding:1.8rem 1rem;background:var(--secondary);border-top:1px solid var(--accent);color:#475569}
+    [data-theme="dark"] footer{color:#e2e8f0}
 
-[data-theme="dark"] header {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  color: #f1f5f9;
-}
+    /* theme toggle */
+    .theme-toggle{
+      position:fixed;top:1.1rem;right:1.1rem;width:60px;height:30px;background:var(--accent);
+      border-radius:50px;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0 6px;z-index:40;
+      transition:all .25s;overflow:visible;
+      box-shadow:0 6px 18px rgba(0,0,0,.12);
+    }
+    .theme-toggle .circle{position:absolute;left:4px;top:3px;width:24px;height:24px;background:var(--primary);border-radius:50%;transition:left .28s, background .28s}
+    [data-theme="dark"] .theme-toggle .circle{left:34px;background:#f1f5f9}
 
-[data-theme="dark"] header::before {
-  background: radial-gradient(circle at 50% 0%, rgba(148,163,184,0.15), transparent 70%);
-}
-
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.3rem, 5vw, 3rem);
-  font-weight: 600;
-  margin-bottom: 1.2rem;
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  color: inherit;
-}
-
-header h1::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -0.4rem;
-  width: 100%;
-  height: 3px;
-  background-color: var(--primary);
-  border-radius: 2px;
-  animation: underlineGrow 2s ease-in-out;
-}
-
-.meta-info {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  text-align: center;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 1;
-}
-
-.meta-divider {
-  width: 60%;
-  max-width: 400px;
-  height: 1px;
-  background-color: var(--accent);
-  margin: 1rem auto 0;
-}
-
-.theme-toggle {
-  position: fixed;
-  top: 1.2rem;
-  right: 1.2rem;
-  width: 60px;
-  height: 30px;
-  background: var(--accent);
-  border-radius: 50px;
-  border: none;
-  cursor: pointer;
-  transition: background 0.4s ease;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 6px;
-  z-index: 10;
-}
-
-.theme-toggle i {
-  font-size: 1rem;
-  color: var(--primary);
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.theme-toggle .circle {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  background-color: var(--primary);
-  border-radius: 50%;
-  left: 3px;
-  transition: all 0.4s ease;
-}
-
-[data-theme="dark"] .theme-toggle .circle {
-  left: 33px;
-  background-color: #f1f5f9;
-}
-
-[data-theme="light"] .theme-toggle .sun {
-  opacity: 1;
-  transform: scale(1);
-}
-
-[data-theme="dark"] .theme-toggle .moon {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem auto 4rem;
-  width: 90%;
-  max-width: 1200px;
-}
-
-aside {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 2rem;
-  background-color: var(--secondary);
-  color: var(--text);
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  width: 100%;
-  margin-bottom: 2rem;
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-aside section {
-  flex: 1;
-  min-width: 250px;
-  padding: 1rem;
-}
-
-aside section:not(:last-child) {
-  border-right: 1px solid var(--accent);
-}
-
-[data-theme="dark"] aside {
-  background-color: #111827;
-  color: #e2e8f0;
-}
-
-[data-theme="dark"] aside section:not(:last-child) {
-  border-color: #475569;
-}
-
-aside h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-  color: var(--primary);
-}
-
-aside p {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
-}
-
-main {
-  background-color: white;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
-  padding: 3rem 2.5rem;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s ease, transform 1s ease, background-color 0.6s ease;
-  width: 100%;
-}
-
-[data-theme="dark"] main {
-  background-color: #1e293b;
-}
-
-main.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-article p {
-  margin-bottom: 1.5rem;
-  text-align: justify;
-  font-size: 1.05rem;
-}
-
-article h2 {
-  color: var(--primary);
-  font-size: 1.3rem;
-  margin: 2.5rem 0 1rem;
-  border-left: 4px solid var(--primary);
-  padding-left: 0.75rem;
-  font-weight: 600;
-}
-
-.work-cited-box {
-  border: 1px solid var(--accent);
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-  background: transparent;
-  transition: background-color 0.6s ease, border-color 0.6s ease;
-}
-
-[data-theme="dark"] .work-cited-box {
-  border-color: #475569;
-  background: rgba(30, 41, 59, 0.5);
-}
-
-footer {
-  text-align: center;
-  background-color: var(--secondary);
-  color: #4b5563;
-  padding: 2rem 1rem;
-  font-size: 0.9rem;
-  border-top: 1px solid var(--accent);
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-[data-theme="dark"] footer {
-  color: #e2e8f0;
-}
-
-footer button {
-  background-color: var(--primary);
-  border: none;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background-color 0.3s, transform 0.2s;
-  margin-top: 1rem;
-}
-
-footer button:hover {
-  background-color: #475569;
-  transform: scale(1.05);
-}
-
-@keyframes underlineGrow {
-  0% { width: 0; opacity: 0; }
-  100% { width: 100%; opacity: 1; }
-}
-
-@keyframes fadeBackground {
-  0% { opacity: 0.6; }
-  100% { opacity: 1; }
-}
-
-@media (max-width: 900px) {
-  aside {
-    flex-direction: column;
-    border: none;
-  }
-
-  aside section:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid var(--accent);
-  }
-}
-
+    /* audio floating button */
+    .audio-toggle{
+      position:fixed;left:50%;transform:translateX(-50%);bottom:2rem;width:56px;height:56px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;border:none;z-index:40;background:var(--primary);color:#fff;
+      box-shadow:0 8px 22px rgba(0,0,0,.22);cursor:pointer;transition:transform .18s, box-shadow .18s, background .18s;
+    }
+    .audio-toggle:hover{transform:translateX(-50%) scale(1.05);box-shadow:0 0 18px var(--primary)}
+    .audio-toggle i{font-size:1.15rem}
+    /* mobile responsiveness */
+    @media (max-width:900px){
+      aside{flex-direction:column;padding:1.4rem}
+      aside section:not(:last-child){border-right:none;border-bottom:1px solid var(--accent);padding-bottom:1rem}
+      .theme-toggle{top:0.8rem;right:0.8rem}
+    }
   </style>
+
+  <!-- fontawesome kit for icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()">
-    <i class="fas fa-sun sun"></i>
-    <div class="circle"></div>
-    <i class="fas fa-moon moon"></i>
-  </button>  <header>
+  <!-- Theme toggle -->
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+    <div class="circle" aria-hidden="true"></div>
+  </button>
+
+  <!-- Audio toggle (floating middle bottom) -->
+  <button id="audioBtn" class="audio-toggle" aria-label="Play narration" title="Play narration">
+    <i id="audioIcon" class="fas fa-play"></i>
+  </button>
+
+  <header>
     <h1>A Simple ‘Hello’ Means More Than Words</h1>
     <div class="meta-info">
-      <p>By Shella Mae Joy Pe&ntilde;a</p>
-      <p>October 29, 2025</p>
-      <p>11 – Ildefonso Paez Santos Jr.</p>
+      <div>By Shella Mae Joy Peña</div>
+      <div>October 29, 2025</div>
+      <div>11 – Ildefonso Paez Santos Jr.</div>
     </div>
-    <div class="meta-divider"></div>
-  </header>  <section class="container">
+  </header>
+
+  <main class="container">
     <aside>
       <section>
         <h3>About This Blog</h3>
         <p>Welcome to my reflective blog space where I share insights and reactions to short films and stories that highlight human connection and empathy. Through each post, I explore how art mirrors life and inspires us to communicate with sincerity and understanding.</p>
-      </section><section>
-    <h3>Related Topics</h3>
-    <p>• Diversity and Inclusion<br>• Power of Communication<br>• Film Reflections<br>• Overcoming Social Anxiety</p>
-  </section>
-</aside>
+      </section>
 
-<main id="content">
-  <article>
-    <p>The short film <em>“Hello”</em>, directed by Richard Galapate, explores the simple yet powerful idea that a single word can open doors to connection, empathy, and understanding. At first glance, the film seems to tell a small story, but upon reflection, it carries a universal message—reminding us how even the smallest acts of kindness can bridge the gaps created by fear, anxiety, or prejudice.</p>
+      <section>
+        <h3>Related Topics</h3>
+        <p>• Diversity and Inclusion<br>• Power of Communication<br>• Film Reflections<br>• Overcoming Social Anxiety</p>
+      </section>
+    </aside>
 
-    <p>From the very beginning, the film introduces a timid protagonist who struggles to interact socially. I found this portrayal deeply realistic and relatable. It mirrors the quiet discomfort that many people, including myself, sometimes feel in social situations. The hesitant glances, awkward pauses, and unspoken thoughts captured through close-up shots all communicate what words cannot—the loneliness of wanting to connect but being too afraid to try. When the turning point arrives and someone simply says “hello,” it breaks the silence and transforms the character’s world entirely. This scene stands out because it captures that one small moment when courage meets compassion.</p>
+    <main id="content" aria-live="polite">
+      <article id="blogPost">
+        <p>The short film <em>“Hello”</em>, directed by Richard Galapate, explores the simple yet powerful idea that a single word can open doors to connection, empathy, and understanding. At first glance, the film seems to tell a small story, but upon reflection, it carries a universal message—reminding us how even the smallest acts of kindness can bridge the gaps created by fear, anxiety, or prejudice.</p>
 
-    <p>What struck me most is how <em>“Hello”</em> doesn’t just focus on communication—it celebrates diversity and the human spirit. The film gracefully includes individuals from different backgrounds, showing how a basic greeting can transcend differences in culture, race, or personality. The message here is clear: connection is a universal language. Through a single word, barriers fall, and understanding begins. The film’s visuals, lighting, and music amplify this theme beautifully, guiding viewers to not just watch the story, but to feel it.</p>
+        <p>From the very beginning, the film introduces a timid protagonist who struggles to interact socially. I found this portrayal deeply realistic and relatable. It mirrors the quiet discomfort that many people, including myself, sometimes feel in social situations. The hesitant glances, awkward pauses, and unspoken thoughts captured through close-up shots all communicate what words cannot—the loneliness of wanting to connect but being too afraid to try. When the turning point arrives and someone simply says “hello,” it breaks the silence and transforms the character’s world entirely. This scene stands out because it captures that one small moment when courage meets compassion.</p>
 
-    <p>Analytically, the film succeeds because of its simplicity. There are no unnecessary dialogues or overly dramatic scenes—just authenticity. The director uses every shot to emphasize human emotion, and this minimalism gives the story emotional depth. The recurring motif of “hello” serves as both a literal and symbolic key—it opens doors, minds, and hearts. The film challenges viewers to reflect on their own interactions, making us question: how often do we ignore the power of such a small gesture?</p>
+        <p>What struck me most is how <em>“Hello”</em> doesn’t just focus on communication—it celebrates diversity and the human spirit. The film gracefully includes individuals from different backgrounds, showing how a basic greeting can transcend differences in culture, race, or personality. The message here is clear: connection is a universal language. Through a single word, barriers fall, and understanding begins. The film’s visuals, lighting, and music amplify this theme beautifully, guiding viewers to not just watch the story, but to feel it.</p>
 
-    <p>On a more personal note, this film reminded me of times when I hesitated to reach out to others. It made me realize that even the smallest effort to connect—whether with a smile or a greeting—can lead to meaningful change. “Hello” taught me that empathy begins not with grand actions, but with small, sincere gestures. It’s a reflection of how one word can alter someone’s day or even inspire growth in ourselves.</p>
+        <p>Analytically, the film succeeds because of its simplicity. There are no unnecessary dialogues or overly dramatic scenes—just authenticity. The director uses every shot to emphasize human emotion, and this minimalism gives the story emotional depth. The recurring motif of “hello” serves as both a literal and symbolic key—it opens doors, minds, and hearts. The film challenges viewers to reflect on their own interactions, making us question: how often do we ignore the power of such a small gesture?</p>
 
-    <p>Ultimately, <em>“Hello”</em> is more than just a short film—it’s a quiet but powerful lesson in humanity. It encourages us to move past self-doubt, to value inclusion, and to take that first step toward others. Whether through kindness, curiosity, or courage, connection starts with something as simple as a “hello.”</p>
+        <p>On a more personal note, this film reminded me of times when I hesitated to reach out to others. It made me realize that even the smallest effort to connect—whether with a smile or a greeting—can lead to meaningful change. “Hello” taught me that empathy begins not with grand actions, but with small, sincere gestures. It’s a reflection of how one word can alter someone’s day or even inspire growth in ourselves.</p>
 
-    <div class="work-cited-box">
-      <h2>Work Cited</h2>
-      <p>Galapate, Richard, director. “Hello – A Short Film about Tolerance & Diversity.” <em>YouTube</em>, uploaded by NikonFilmFestPH, 22 Nov. 2019, <a href="https://www.youtube.com/watch?v=3AQ7yC5jQ28" target="_blank">www.youtube.com/watch?v=3AQ7yC5jQ28</a>.</p>
-    </div>
-  </article>
-</main>
+        <p>Ultimately, <em>“Hello”</em> is more than just a short film—it’s a quiet but powerful lesson in humanity. It encourages us to move past self-doubt, to value inclusion, and to take that first step toward others. Whether through kindness, curiosity, or courage, connection starts with something as simple as a “hello.”</p>
 
-  </section>  <footer>
-    <p>&copy; 2025 Shella Mae Joy Pe&ntilde;a. All rights reserved.</p>
-    <button onclick="scrollToTop()">Back to Top</button>
-  </footer>  <script>
+        <div class="work-cited-box">
+          <h3>Work Cited</h3>
+          <p>Galapate, Richard, director. “Hello – A Short Film about Tolerance & Diversity.” <em>YouTube</em>, uploaded by NikonFilmFestPH, 22 Nov. 2019, <a href="https://www.youtube.com/watch?v=3AQ7yC5jQ28" target="_blank" rel="noopener noreferrer">youtube.com/watch?v=3AQ7yC5jQ28</a>.</p>
+        </div>
+      </article>
+    </main>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Shella Mae Joy Peña. All rights reserved.</p>
+    <button onclick="scrollToTop()" aria-label="Back to top">Back to Top</button>
+  </footer>
+
+  <script>
+    // On load: set theme
     document.addEventListener('DOMContentLoaded', () => {
-      const main = document.getElementById('content');
-      setTimeout(() => main.classList.add('visible'), 400);
-
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      document.documentElement.setAttribute('data-theme', savedTheme);
+      const saved = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
     });
 
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function toggleTheme(){
+      const cur = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = cur === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
     }
 
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
-  </script></body>
-</html>
+    function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}) }
 
-This is the last code that was made and I forgot to add, can you have an audio that reads everything written in the blog post? (Don't include the "About" and "Related") Make the voice human-like and audible. Use female, and make a button where people can turn the audio on and off. If possible can you make it a floating button, same shape as the ligt and dark mode button but at the middle bottom of the screen so when you scroll it goes with your screen, use the play and pauss button make sure it'll look aesthetically pleasing—add a subtle hiver glow on it and match the primary theme color.
+    /* -------------------------
+       Speech (narration) setup
+       ------------------------- */
+    const audioBtn = document.getElementById('audioBtn');
+    const audioIcon = document.getElementById('audioIcon');
+    const blogArticle = document.getElementById('blogPost');
+    let synth = window.speechSynthesis;
+    let voices = [];
+    let utterance = null;
+    let isPlaying = false;
+
+    // prepare text: remove About/Related (they're outside blogPost) and take article content only
+    function getBlogText(){
+      // innerText preserves readable spacing
+      return blogArticle.innerText.trim();
+    }
+
+    // select a likely female voice (best-effort)
+    function pickFemaleVoice(){
+      if(!voices || voices.length===0) return null;
+      // prefer explicit female names
+      const femaleCandidates = voices.filter(v=>{
+        const n = (v.name + ' ' + v.lang).toLowerCase();
+        return n.includes('female') || n.includes('google uk english female') || n.includes('english (uk)') || n.includes('alloy') || n.includes('sara') || /female|woman|woman/i.test(n);
+      });
+      if(femaleCandidates.length) return femaleCandidates[0];
+      // fallback to any english voice
+      const en = voices.find(v=>v.lang && v.lang.toLowerCase().startsWith('en'));
+      return en || voices[0];
+    }
+
+    function loadVoices(){
+      voices = synth.getVoices() || [];
+    }
+
+    // some browsers populate voices asynchronously
+    loadVoices();
+    if (typeof speechSynthesis !== 'undefined') {
+      speechSynthesis.onvoiceschanged = () => {
+        loadVoices();
+      };
+    }
+
+    // start narration
+    function startNarration(){
+      if(isPlaying) return;
+      const text = getBlogText();
+      if(!text) return;
+      utterance = new SpeechSynthesisUtterance(text);
+      // choose voice
+      const chosen = pickFemaleVoice();
+      if(chosen) utterance.voice = chosen;
+      utterance.rate = 0.95; // slight slower for clarity
+      utterance.pitch = 1.02;
+      utterance.volume = 1;
+      utterance.onend = () => {
+        isPlaying = false;
+        audioIcon.className = 'fas fa-play';
+      };
+      utterance.onerror = () => {
+        isPlaying = false;
+        audioIcon.className = 'fas fa-play';
+      };
+      synth.speak(utterance);
+      isPlaying = true;
+      audioIcon.className = 'fas fa-pause';
+    }
+
+    // stop narration
+    function stopNarration(){
+      if(synth && synth.speaking) synth.cancel();
+      isPlaying = false;
+      audioIcon.className = 'fas fa-play';
+    }
+
+    audioBtn.addEventListener('click', () => {
+      // Toggle
+      if(!isPlaying){
+        startNarration();
+      } else {
+        stopNarration();
+      }
+    });
+
+    // if user navigates away or hides page, stop speak to avoid background audio
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden && isPlaying) stopNarration();
+    });
+
+    // ensure the button shows correct icon if speech stops externally
+    setInterval(()=>{
+      if(!synth.speaking && isPlaying){
+        // speech ended but onend may not have fired — normalize
+        isPlaying = false;
+        audioIcon.className = 'fas fa-play';
+      }
+    },700);
+
+  </script>
+</body>
+  </html>
